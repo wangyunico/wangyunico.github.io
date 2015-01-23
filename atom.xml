@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[王晓晓的技术札记]]></title>
+  <link href="http://wangyunico.github.io/atom.xml" rel="self"/>
+  <link href="http://wangyunico.github.io/"/>
+  <updated>2015-01-23T16:38:42+08:00</updated>
+  <id>http://wangyunico.github.io/</id>
+  <author>
+    <name><![CDATA[wangyunico]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+</feed>

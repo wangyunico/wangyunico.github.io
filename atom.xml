@@ -4,7 +4,7 @@
   <title><![CDATA[王晓晓的技术札记]]></title>
   <link href="http://wangyunico.github.io/atom.xml" rel="self"/>
   <link href="http://wangyunico.github.io/"/>
-  <updated>2015-03-14T22:05:43+08:00</updated>
+  <updated>2015-03-14T22:08:26+08:00</updated>
   <id>http://wangyunico.github.io/</id>
   <author>
     <name><![CDATA[wangyunico]]></name>
@@ -61,7 +61,8 @@
 <li><p>如果不想让冒泡停止，如在某一个<code>View</code>中强制返回某个需要响应的<code>子view</code>,就需要在<code>子view</code>的touches事件做处理，调用相应的<code>nextResponder</code>继续冒泡的过程,例如：
 <pre><code>- (void)touchesBegan:(NSSet<em>)touches withEvent:(UIEvent </em>)event{
 [ self.nextResponder touchesBegan:touches withEvent:event];
-}</code></pre></p></li>
+}
+</code></pre></p></li>
 <li>当不让某个View收到消息，设置<code>View.userInteractionEnable=NO</code>;</li>
 </ol>
 

@@ -127,7 +127,8 @@
 <li><p>如果不想让冒泡停止，如在某一个<code>View</code>中强制返回某个需要响应的<code>子view</code>,就需要在<code>子view</code>的touches事件做处理，调用相应的<code>nextResponder</code>继续冒泡的过程,例如：
 <pre><code>- (void)touchesBegan:(NSSet<em>)touches withEvent:(UIEvent </em>)event{
 [ self.nextResponder touchesBegan:touches withEvent:event];
-}</code></pre></p></li>
+}
+</code></pre></p></li>
 <li>当不让某个View收到消息，设置<code>View.userInteractionEnable=NO</code>;</li>
 </ol>
 

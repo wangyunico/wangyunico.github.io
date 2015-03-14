@@ -102,20 +102,35 @@
    pointInside: withEvent:
 </code></pre></p>
 
-<p> hitTest:withEvent处理流程如下：
-   * 1：调用当前视图的<code>pointInside:withEvent</code>判断点击的点(已经转换以当前视图为基准视图的坐标点)是否在当前视图内:
-    1. 如果返回值为<code>false</code>说明触摸点不在当前视图内，<code>hitTest:</code>返回为<code>nil</code>
-    2. 如果返回<code>true</code>,那么默认地执行(可执行事件捕获阶段的拦截)所有子视图的<code>hitTest:withEvent</code>的调用。如此递归地执行调用，如果所有子视图都返回空，则返回该视图自己。
-    3.这样会得到一条事件捕获的链，当拿到这个响应的<code>View</code>时，会调用该<code>UIView</code>的<code>touches</code>方法。</p>
+<p> hitTest:withEvent处理流程如下：</p>
+
+<ol>
+<li>调用当前视图的<code>pointInside:withEvent</code>判断点击的点(已经转换以当前视图为基准视图的坐标点)是否在当前视图内:
+
+<ol>
+<li>如果返回值为<code>false</code>说明触摸点不在当前视图内，<code>hitTest:</code>返回为<code>nil</code></li>
+<li>如果返回<code>true</code>,那么默认地执行(可执行事件捕获阶段的拦截)所有子视图的<code>hitTest:withEvent</code>的调用。如此递归地执行调用，如果所有子视图都返回空，则返回该视图自己。</li>
+</ol>
+</li>
+<li>最终会得到一条事件捕获的链，当拿到这个响应的<code>View</code>时，会调用该<code>UIView</code>的<code>touches</code>方法。</li>
+</ol>
+
 
 <h4>事件冒泡</h4>
 
 <p>在默认的事件捕获的流程中，当最终的<code>view</code>捕获到该事件后，就进行对事件的处理，调用响应链<code>nexResponder</code>一点一点地将消息传递到<code>UIApplicationDelgate</code>中，完成事件冒泡的过程。</p>
 
-<p>需要注意的是，在<code>iOS</code>事件处理环节当中，如果传递的事件被处理了默认就不再向父层传递(当<code>View</code>手动处理<code>hitTest</code>事件，强制返回某个<code>子view</code>而不是本身的<code>View</code>来响应事件的捕获，事件的冒泡就默认停止)</p>
+<p><strong>注意</strong></p>
 
-<p>如果我们不想让冒泡停止，当我们在某一个<code>View</code>中强制返回某个需要响应的<code>子view</code>,就需要在<code>子view</code>的touches事件做处理，调用相应的<code>nextResponder</code> 如在<code>- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event</code>中调用 <code>[self.nextResponder touchesBegan:touches withEvent:event];</code>来继续冒泡的过程。
-当不让某个View收到消息，设置<code>View.userInteractionEnable=NO</code>;</p>
+<ol>
+<li><p>在<code>iOS</code>事件处理环节当中，如果传递的事件被处理了默认就不再向父层传递(当<code>View</code>手动处理<code>hitTest</code>事件，强制返回某个<code>子view</code>而不是本身的<code>View</code>来响应事件的捕获，事件的冒泡就默认停止)</p></li>
+<li><p>如果不想让冒泡停止，如在某一个<code>View</code>中强制返回某个需要响应的<code>子view</code>,就需要在<code>子view</code>的touches事件做处理，调用相应的<code>nextResponder</code>继续冒泡的过程,例如：
+<pre><code>- (void)touchesBegan:(NSSet<em>)touches withEvent:(UIEvent </em>)event{
+[ self.nextResponder touchesBegan:touches withEvent:event];
+}</code></pre></p></li>
+<li>当不让某个View收到消息，设置<code>View.userInteractionEnable=NO</code>;</li>
+</ol>
+
 </div>
 
 
